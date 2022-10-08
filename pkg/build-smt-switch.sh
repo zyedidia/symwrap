@@ -15,3 +15,6 @@ cd ../../
 mkdir lib
 cp smt-switch/build/libsmt-switch.so ./lib
 cp smt-switch/build/$SOLVER/libsmt-switch-$SOLVER.so ./lib
+
+mkdir include
+cp -r smt-switch/include ./include/smt-switch

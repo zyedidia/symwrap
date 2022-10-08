@@ -1,1 +1,4 @@
 pkg/lib
+pkg/include
+*.o
+.knit
