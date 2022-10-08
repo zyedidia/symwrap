@@ -1,31 +1,8 @@
 #include "smt-switch/smt.h"
 
+#include "types.hh"
+
 using namespace smt;
-
-typedef struct {
-    bool c;
-    Term s;
-} sbool_t;
-
-typedef struct {
-    int8_t c;
-    Term s;
-} si8_t;
-
-typedef struct {
-    int16_t c;
-    Term s;
-} si16_t;
-
-typedef struct {
-    int32_t c;
-    Term s;
-} si32_t;
-
-typedef struct {
-    int64_t c;
-    Term s;
-} si64_t;
 
 bool si32_concrete(si32_t i) {
     return i.s == NULL;
@@ -49,6 +26,12 @@ si32_t si32_any(SmtSolver solver, std::string name) {
     };
 }
 
+si32_t si32_conc(int32_t i) {
+    return (si32_t){
+        .c = i,
+    };
+}
+
 Term sym(SmtSolver solver, si32_t i) {
     if (!si32_concrete(i)) {
         return i.s;
@@ -59,6 +42,8 @@ Term sym(SmtSolver solver, si32_t i) {
     }
     return solver->make_term(i.c, bv32);
 }
+
+// TODO: need to automatically call 'sym' before doing a symbolic op
 
 #define mk_binop(a, b, conc_op, sym_op)               \
     do {                                              \
