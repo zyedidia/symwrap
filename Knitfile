@@ -1,4 +1,4 @@
 return r{
-$ build:V: types.cc
-    g++ -O2 -c -o symwrap.o $input -Ipkg/include -Wl,-rpath,./pkg/lib -Lpkg/lib -lsmt-switch-bitwuzla -lsmt-switch-bitwuzla
+$ build:V: types.cc bv.h
+    g++ -O2 -o symwrap types.cc -Ipkg/include -Wl,-rpath,./pkg/lib -Lpkg/lib -lsmt-switch-bitwuzla -lsmt-switch
 }
